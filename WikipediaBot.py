@@ -9,9 +9,9 @@ def main():
     start_url = "https://en.wikipedia.org/wiki/Special:Random"
     end_url = "https://en.wikipedia.org/wiki/Special:Random"
     if len(sys.argv) > 1:
-        start_url = sys.argv[1]
+        end_url = sys.argv[1]
     if len(sys.argv) > 2:
-        end_url = sys.argv[2]
+        start_url = sys.argv[2]
     
     start_page_name = get_page_title(start_url)
     global end_page_name
@@ -19,7 +19,7 @@ def main():
     print(f'Start={start_page_name} -> end={end_page_name}')
 
     result = []
-    wiki_search(start_url, end_page_name,end_url, 7, 2, result)
+    wiki_search(start_url, end_page_name,end_url, 3, 3, result)
     print('--------SOLUTION---------\n')
     print(f'[{format_path(result)}]')
 
@@ -80,7 +80,10 @@ def wiki_search(start_url, end_page_name, end_page_url, max_depth, max_breadth, 
 
     page_title = get_page_title(start_url)
     path.append(page_title)
-    print(format_path(path) + '\n')
+    if(len(path) > 10):
+        print(f'...{format_path(path[-5:])}')
+    else:
+        print(format_path(path) + '\n')
     if max_depth == 0:
         # print("MAX DEPTH REACHED")
         # print(format_path(path))
